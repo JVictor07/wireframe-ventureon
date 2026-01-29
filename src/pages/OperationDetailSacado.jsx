@@ -22,21 +22,45 @@ import {
   FileTextIcon,
   DollarSignIcon,
   ClockIcon,
-  StarIcon
+  StarIcon,
+  HandshakeIcon
 } from "lucide-react"
+import { toast } from "sonner"
 import operacaoData from "@/data/operacao-detalhada.json"
 
 export function OperationDetailSacado() {
   const navigate = useNavigate()
   const [approveDialogOpen, setApproveDialogOpen] = useState(false)
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false)
+  const [selectedFinancier, setSelectedFinancier] = useState(null)
+  const [financeDialogOpen, setFinanceDialogOpen] = useState(false)
 
   const handleApprove = () => {
+    toast.success("Operação aprovada com sucesso!")
     setApproveDialogOpen(false)
   }
 
   const handleReject = () => {
+    toast.error("Operação rejeitada")
     setRejectDialogOpen(false)
+  }
+
+  const handleSelectFinancier = (financier) => {
+    setSelectedFinancier(financier)
+    toast.success(`Financiador ${financier.nome} selecionado`)
+  }
+
+  const handleMarkAsFinanced = () => {
+    if (!selectedFinancier) {
+      toast.error("Selecione um financiador primeiro")
+      return
+    }
+    setFinanceDialogOpen(true)
+  }
+
+  const confirmFinance = () => {
+    toast.success("Operação marcada como financiada!")
+    setFinanceDialogOpen(false)
   }
 
   const getStatusBadge = (status) => {
@@ -158,7 +182,9 @@ export function OperationDetailSacado() {
                     <div
                       key={fin.id}
                       className={`p-4 rounded-lg border-2 transition-all ${
-                        fin.isLowestRate
+                        selectedFinancier?.id === fin.id
+                          ? 'border-primary bg-primary/5'
+                          : fin.isLowestRate
                           ? 'border-green-600 bg-green-50/50 dark:bg-green-950/10'
                           : 'border-border bg-card'
                       }`}
@@ -171,6 +197,11 @@ export function OperationDetailSacado() {
                               <Badge variant="default" className="bg-green-600 text-white hover:bg-green-700">
                                 <StarIcon className="w-3 h-3 mr-1" />
                                 Menor Taxa
+                              </Badge>
+                            )}
+                            {selectedFinancier?.id === fin.id && (
+                              <Badge variant="default" className="bg-primary text-white">
+                                Selecionado
                               </Badge>
                             )}
                           </div>
@@ -188,6 +219,16 @@ export function OperationDetailSacado() {
                               <p className="font-medium">{fin.prazo}</p>
                             </div>
                           </div>
+                          <div className="mt-3">
+                            <Button
+                              size="sm"
+                              variant={selectedFinancier?.id === fin.id ? "default" : "outline"}
+                              onClick={() => handleSelectFinancier(fin)}
+                              className="w-full"
+                            >
+                              {selectedFinancier?.id === fin.id ? "Selecionado" : "Selecionar"}
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -200,33 +241,57 @@ export function OperationDetailSacado() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Actions */}
-            {canTakeAction && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Ações</CardTitle>
-                  <CardDescription>
-                    Tome uma decisão sobre esta operação
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button 
-                    className="w-full" 
-                    onClick={() => setApproveDialogOpen(true)}
-                  >
-                    <CheckCircle2Icon className="w-4 h-4 mr-2" />
-                    Aprovar Operação
-                  </Button>
-                  <Button 
-                    variant="destructive" 
-                    className="w-full"
-                    onClick={() => setRejectDialogOpen(true)}
-                  >
-                    <XCircleIcon className="w-4 h-4 mr-2" />
-                    Rejeitar Operação
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
+            <Card>
+              <CardHeader>
+                <CardTitle>Ações</CardTitle>
+                <CardDescription>
+                  {canTakeAction ? "Tome uma decisão sobre esta operação" : "Gerencie o financiamento"}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {canTakeAction ? (
+                  <>
+                    <Button 
+                      className="w-full" 
+                      onClick={() => setApproveDialogOpen(true)}
+                    >
+                      <CheckCircle2Icon className="w-4 h-4 mr-2" />
+                      Aprovar Operação
+                    </Button>
+                    <Button 
+                      variant="destructive" 
+                      className="w-full"
+                      onClick={() => setRejectDialogOpen(true)}
+                    >
+                      <XCircleIcon className="w-4 h-4 mr-2" />
+                      Rejeitar Operação
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-3 bg-muted rounded-lg text-sm">
+                      {selectedFinancier ? (
+                        <div>
+                          <p className="font-semibold">Financiador Selecionado:</p>
+                          <p className="text-muted-foreground">{selectedFinancier.nome}</p>
+                          <p className="text-primary font-bold mt-1">Taxa: {selectedFinancier.taxa}%</p>
+                        </div>
+                      ) : (
+                        <p className="text-muted-foreground">Selecione um financiador abaixo</p>
+                      )}
+                    </div>
+                    <Button 
+                      className="w-full" 
+                      onClick={handleMarkAsFinanced}
+                      disabled={!selectedFinancier}
+                    >
+                      <HandshakeIcon className="w-4 h-4 mr-2" />
+                      Marcar como Financiada
+                    </Button>
+                  </>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Operation History */}
             <Card>
@@ -358,6 +423,48 @@ export function OperationDetailSacado() {
             </Button>
             <Button variant="destructive" onClick={handleReject}>
               Confirmar Rejeição
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Finance Confirmation Dialog */}
+      <Dialog open={financeDialogOpen} onOpenChange={setFinanceDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <HandshakeIcon className="w-5 h-5 text-green-500" />
+              Confirmar Financiamento
+            </DialogTitle>
+            <DialogDescription>
+              Você está prestes a marcar a operação <strong>{operacaoData.id}</strong> como financiada.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4 space-y-3">
+            <div className="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Financiador:</span>
+                <span className="font-medium">{selectedFinancier?.nome}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Taxa:</span>
+                <span className="font-medium text-green-600">{selectedFinancier?.taxa}%</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Valor Líquido:</span>
+                <span className="font-medium">{selectedFinancier?.valorLiquido}</span>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Esta ação marcará a operação como concluída no sistema.
+            </p>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setFinanceDialogOpen(false)}>
+              Cancelar
+            </Button>
+            <Button onClick={confirmFinance}>
+              Confirmar Financiamento
             </Button>
           </DialogFooter>
         </DialogContent>

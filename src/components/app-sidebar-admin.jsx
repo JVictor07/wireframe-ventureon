@@ -2,9 +2,6 @@ import { useNavigate } from "react-router-dom"
 import {
   LayoutDashboardIcon,
   BuildingIcon,
-  PackageIcon,
-  TrendingDownIcon,
-  FileTextIcon,
   LogOutIcon,
   ShieldIcon
 } from "lucide-react"
@@ -39,28 +36,13 @@ export function AppSidebarAdmin({ ...props }) {
       url: "/admin/dashboard",
       icon: LayoutDashboardIcon,
     },
-    {
-      title: "Cadastrar NF",
-      url: "/admin/nota-fiscal",
-      icon: FileTextIcon,
-    },
   ]
 
   const navManagement = [
     {
-      title: "Sacados",
+      title: "Clientes",
       url: "/admin/sacados",
       icon: BuildingIcon,
-    },
-    {
-      title: "Fornecedores",
-      url: "/admin/fornecedores",
-      icon: PackageIcon,
-    },
-    {
-      title: "Financiadores",
-      url: "/admin/financiadores",
-      icon: TrendingDownIcon,
     },
   ]
 

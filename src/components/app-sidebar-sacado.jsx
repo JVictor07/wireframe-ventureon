@@ -4,7 +4,11 @@ import {
   SettingsIcon,
   FileTextIcon,
   LogOutIcon,
-  BuildingIcon
+  BuildingIcon,
+  PackageIcon,
+  TrendingDownIcon,
+  UsersIcon,
+  Building2Icon
 } from "lucide-react"
 import {
   Sidebar,
@@ -16,6 +20,7 @@ import {
   SidebarMenuItem,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
 } from "@/components/ui/sidebar"
 import {
   DropdownMenu,
@@ -30,16 +35,47 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 export function AppSidebarSacado({ ...props }) {
   const navigate = useNavigate()
 
-  const navItems = [
+  const navMain = [
     {
       title: "Dashboard",
       url: "/sacado/dashboard",
       icon: LayoutDashboardIcon,
     },
+  ]
+
+  const navOperations = [
+    {
+      title: "Notas Fiscais",
+      url: "/sacado/notas-fiscais",
+      icon: FileTextIcon,
+    },
+    {
+      title: "Fornecedores",
+      url: "/sacado/fornecedores",
+      icon: PackageIcon,
+    },
+    {
+      title: "Financiadores",
+      url: "/sacado/financiadores",
+      icon: TrendingDownIcon,
+    },
     {
       title: "Configurar Programa",
       url: "/sacado/programa",
       icon: SettingsIcon,
+    },
+  ]
+
+  const navManagement = [
+    {
+      title: "Minha Empresa",
+      url: "/sacado/empresa",
+      icon: Building2Icon,
+    },
+    {
+      title: "Equipe",
+      url: "/sacado/equipe",
+      icon: UsersIcon,
     },
   ]
 
@@ -64,7 +100,43 @@ export function AppSidebarSacado({ ...props }) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => (
+              {navMain.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    onClick={() => navigate(item.url)}
+                    tooltip={item.title}
+                  >
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Operações</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {navOperations.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    onClick={() => navigate(item.url)}
+                    tooltip={item.title}
+                  >
+                    <item.icon />
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Gerenciamento</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {navManagement.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     onClick={() => navigate(item.url)}

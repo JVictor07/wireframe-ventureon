@@ -66,7 +66,7 @@ export function InvoiceCreate() {
       <header className="border-b bg-card">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/dashboard")}>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/sacado/dashboard")}>
               <ArrowLeftIcon className="w-4 h-4 mr-2" />
               Voltar
             </Button>
@@ -97,8 +97,8 @@ export function InvoiceCreate() {
                   </p>
                   <p className="text-sm text-yellow-800 dark:text-yellow-200 mt-1">
                     Esta tela registra apenas a nota fiscal no sistema. 
-                    Ela <strong>NÃO cria operações</strong> e <strong>NÃO inicia antecipação</strong>. 
-                    A operação será criada posteriormente pelo fluxo administrativo.
+                    Ela <strong>NÃO cria operações automaticamente</strong>. 
+                    Após o cadastro, você poderá criar uma operação baseada nesta nota fiscal.
                   </p>
                 </div>
               </div>
@@ -209,7 +209,7 @@ export function InvoiceCreate() {
               * Campos obrigatórios
             </p>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => navigate("/admin/dashboard")}>
+              <Button variant="outline" onClick={() => navigate("/sacado/dashboard")}>
                 Cancelar
               </Button>
               <Button onClick={handleSave}>
@@ -225,9 +225,10 @@ export function InvoiceCreate() {
               <h3 className="font-semibold mb-2">Próximos Passos</h3>
               <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
                 <li>Nota fiscal será registrada no sistema</li>
-                <li>Admin poderá criar uma operação baseada nesta nota</li>
-                <li>Operação será enviada para aprovação do sacado</li>
-                <li>Após aprovação, financiadores apresentarão propostas</li>
+                <li>Você poderá visualizar a nota na lista de notas fiscais</li>
+                <li>Criar uma operação baseada nesta nota fiscal</li>
+                <li>Aprovar a operação e selecionar o financiador</li>
+                <li>Marcar a operação como financiada</li>
               </ol>
             </CardContent>
           </Card>

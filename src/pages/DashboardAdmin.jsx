@@ -12,18 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import { 
   SearchIcon,
   EyeIcon,
-  XCircleIcon,
   FilterIcon,
   TrendingUpIcon,
   AlertCircleIcon,
@@ -54,21 +45,17 @@ const getStatusBadge = (status) => {
 export function DashboardAdmin() {
   const navigate = useNavigate()
   const [selectedFilter, setSelectedFilter] = useState("todas")
-  const [cancelDialogOpen, setCancelDialogOpen] = useState(false)
-  const [selectedOperation, setSelectedOperation] = useState(null)
 
   const filteredOperations = selectedFilter === "todas" 
     ? operacoesData 
     : operacoesData.filter(op => op.status === selectedFilter)
 
-  const handleCancelClick = (operation) => {
-    setSelectedOperation(operation)
-    setCancelDialogOpen(true)
+  const parseValor = (valorStr) => {
+    return parseFloat(valorStr.replace('R$ ', '').replace(/\./g, '').replace(',', '.'))
   }
 
-  const handleConfirmCancel = () => {
-    setCancelDialogOpen(false)
-    setSelectedOperation(null)
+  const formatValor = (valor) => {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor)
   }
 
   const statusCounts = {
@@ -76,6 +63,13 @@ export function DashboardAdmin() {
     pendentes: operacoesData.filter(op => op.status === "Aguardando aprovação").length,
     aprovadas: operacoesData.filter(op => op.status === "Aprovada pelo sacado").length,
     financiadas: operacoesData.filter(op => op.status === "Financiada").length,
+  }
+
+  const statusValues = {
+    total: operacoesData.reduce((sum, op) => sum + parseValor(op.valor), 0),
+    pendentes: operacoesData.filter(op => op.status === "Aguardando aprovação").reduce((sum, op) => sum + parseValor(op.valor), 0),
+    aprovadas: operacoesData.filter(op => op.status === "Aprovada pelo sacado").reduce((sum, op) => sum + parseValor(op.valor), 0),
+    financiadas: operacoesData.filter(op => op.status === "Financiada").reduce((sum, op) => sum + parseValor(op.valor), 0),
   }
 
   return (
@@ -96,6 +90,9 @@ export function DashboardAdmin() {
               <div className="text-sm text-muted-foreground">
                 Todas as operações ativas
               </div>
+              <div className="text-lg font-semibold mt-2">
+                {formatValor(statusValues.total)}
+              </div>
             </CardContent>
           </Card>
 
@@ -110,6 +107,9 @@ export function DashboardAdmin() {
             <CardContent>
               <div className="text-sm text-muted-foreground">
                 Aguardando aprovação
+              </div>
+              <div className="text-lg font-semibold mt-2">
+                {formatValor(statusValues.pendentes)}
               </div>
             </CardContent>
           </Card>
@@ -126,6 +126,9 @@ export function DashboardAdmin() {
               <div className="text-sm text-muted-foreground">
                 Aprovadas pelo sacado
               </div>
+              <div className="text-lg font-semibold mt-2">
+                {formatValor(statusValues.aprovadas)}
+              </div>
             </CardContent>
           </Card>
 
@@ -141,17 +144,20 @@ export function DashboardAdmin() {
               <div className="text-sm text-muted-foreground">
                 Operações concluídas
               </div>
+              <div className="text-lg font-semibold mt-2">
+                {formatValor(statusValues.financiadas)}
+              </div>
             </CardContent>
           </Card>
-        </div>
+      </div>
 
-        {/* Operations Table */}
-        <Card>
+      {/* Operations Table */}
+      <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle>Operações Globais</CardTitle>
-                <CardDescription>Gerencie todas as operações da plataforma</CardDescription>
+                <CardDescription>Monitoramento global de operações</CardDescription>
               </div>
               <div className="flex items-center gap-2">
                 <div className="relative">
@@ -212,21 +218,10 @@ export function DashboardAdmin() {
                       <TableCell>{new Date(op.vencimento).toLocaleDateString('pt-BR')}</TableCell>
                       <TableCell>{getStatusBadge(op.status)}</TableCell>
                       <TableCell className="text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/operacao/${op.id}`)}>
-                            <EyeIcon className="w-4 h-4 mr-1" />
-                            Ver
-                          </Button>
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            className="text-destructive hover:text-destructive"
-                            onClick={() => handleCancelClick(op)}
-                          >
-                            <XCircleIcon className="w-4 h-4 mr-1" />
-                            Cancelar
-                          </Button>
-                        </div>
+                        <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/operacao/${op.id}`)}>
+                          <EyeIcon className="w-4 h-4 mr-1" />
+                          Visualizar
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))
@@ -236,42 +231,6 @@ export function DashboardAdmin() {
           </CardContent>
         </Card>
 
-      {/* Cancel Confirmation Dialog */}
-      <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirmar Cancelamento</DialogTitle>
-            <DialogDescription>
-              Tem certeza que deseja cancelar a operação <strong>{selectedOperation?.id}</strong>?
-              Esta ação não pode ser desfeita.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-4">
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Sacado:</span>
-                <span className="font-medium">{selectedOperation?.sacado}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Fornecedor:</span>
-                <span className="font-medium">{selectedOperation?.fornecedor}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Valor:</span>
-                <span className="font-medium">{selectedOperation?.valor}</span>
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setCancelDialogOpen(false)}>
-              Voltar
-            </Button>
-            <Button variant="destructive" onClick={handleConfirmCancel}>
-              Confirmar Cancelamento
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </LayoutWithSidebar>
   )
 }
