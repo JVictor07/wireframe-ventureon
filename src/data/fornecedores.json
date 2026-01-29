@@ -1,0 +1,56 @@
+[
+  {
+    "id": "FOR-001",
+    "nome": "Fornecedor ABC Ltda",
+    "cnpj": "12.345.678/0001-90",
+    "sacadoAssociado": "Empresa Alpha S.A.",
+    "email": "contato@fornecedorabc.com.br",
+    "telefone": "(11) 3456-7890",
+    "status": "Ativo"
+  },
+  {
+    "id": "FOR-002",
+    "nome": "Distribuidora XYZ S.A.",
+    "cnpj": "23.456.789/0001-01",
+    "sacadoAssociado": "Empresa Alpha S.A.",
+    "email": "comercial@distribuidoraxyz.com.br",
+    "telefone": "(11) 4567-8901",
+    "status": "Ativo"
+  },
+  {
+    "id": "FOR-003",
+    "nome": "Indústria Tech Solutions",
+    "cnpj": "34.567.890/0001-12",
+    "sacadoAssociado": "Empresa Alpha S.A.",
+    "email": "vendas@techsolutions.com.br",
+    "telefone": "(11) 5678-9012",
+    "status": "Ativo"
+  },
+  {
+    "id": "FOR-004",
+    "nome": "Comercial Beta Ltda",
+    "cnpj": "45.678.901/0001-23",
+    "sacadoAssociado": "Empresa Beta Corp",
+    "email": "contato@comercialbeta.com.br",
+    "telefone": "(21) 3456-7890",
+    "status": "Ativo"
+  },
+  {
+    "id": "FOR-005",
+    "nome": "Serviços Gamma S.A.",
+    "cnpj": "56.789.012/0001-34",
+    "sacadoAssociado": "Empresa Gamma Ltda",
+    "email": "atendimento@servicosgamma.com.br",
+    "telefone": "(31) 4567-8901",
+    "status": "Ativo"
+  },
+  {
+    "id": "FOR-006",
+    "nome": "Fornecedor Delta Corp",
+    "cnpj": "67.890.123/0001-45",
+    "sacadoAssociado": "Empresa Beta Corp",
+    "email": "vendas@fornecedordelta.com.br",
+    "telefone": "(21) 5678-9012",
+    "status": "Inativo"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "SAC-001",
+    "nome": "Empresa Alpha S.A.",
+    "cnpj": "98.765.432/0001-10",
+    "status": "Ativo",
+    "programa": "Programa Supply Chain Alpha",
+    "prazoMedio": "30 dias",
+    "dataOnboarding": "2023-06-15"
+  },
+  {
+    "id": "SAC-002",
+    "nome": "Empresa Beta Corp",
+    "cnpj": "87.654.321/0001-20",
+    "status": "Ativo",
+    "programa": "Programa Beta Fornecedores",
+    "prazoMedio": "45 dias",
+    "dataOnboarding": "2023-08-20"
+  },
+  {
+    "id": "SAC-003",
+    "nome": "Empresa Gamma Ltda",
+    "cnpj": "76.543.210/0001-30",
+    "status": "Ativo",
+    "programa": "Programa Gamma Network",
+    "prazoMedio": "60 dias",
+    "dataOnboarding": "2023-10-10"
+  },
+  {
+    "id": "SAC-004",
+    "nome": "Indústria Delta S.A.",
+    "cnpj": "65.432.109/0001-40",
+    "status": "Inativo",
+    "programa": "Programa Delta Industrial",
+    "prazoMedio": "30 dias",
+    "dataOnboarding": "2023-05-01"
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "id": "OP-2024-001",
+  "status": "Aguardando aprovação",
+  "fornecedor": {
+    "nome": "Fornecedor ABC Ltda",
+    "cnpj": "12.345.678/0001-90",
+    "contato": "contato@fornecedorabc.com.br"
+  },
+  "notaFiscal": {
+    "numero": "NF-12345",
+    "dataEmissao": "2024-01-15",
+    "valorBruto": "R$ 125.000,00",
+    "vencimento": "2024-02-15",
+    "descricao": "Fornecimento de matéria-prima industrial"
+  },
+  "sacado": {
+    "nome": "Empresa Alpha S.A.",
+    "cnpj": "98.765.432/0001-10"
+  },
+  "programa": "Programa Supply Chain Alpha",
+  "financiadores": [
+    {
+      "id": "FIN-001",
+      "nome": "Banco Financiador A",
+      "taxa": 1.2,
+      "valorLiquido": "R$ 123.500,00",
+      "prazo": "30 dias",
+      "isLowestRate": true
+    },
+    {
+      "id": "FIN-002",
+      "nome": "Financeira Beta S.A.",
+      "taxa": 1.5,
+      "valorLiquido": "R$ 123.125,00",
+      "prazo": "30 dias",
+      "isLowestRate": false
+    },
+    {
+      "id": "FIN-003",
+      "nome": "Crédito Gamma Corp",
+      "taxa": 1.8,
+      "valorLiquido": "R$ 122.750,00",
+      "prazo": "30 dias",
+      "isLowestRate": false
+    }
+  ],
+  "financiadorSelecionado": null,
+  "historico": [
+    {
+      "data": "2024-01-15T10:30:00",
+      "evento": "Nota fiscal cadastrada",
+      "responsavel": "Sistema",
+      "detalhes": "NF-12345 cadastrada no sistema"
+    },
+    {
+      "data": "2024-01-15T14:20:00",
+      "evento": "Operação criada",
+      "responsavel": "Admin - João Silva",
+      "detalhes": "Operação OP-2024-001 criada e enviada para aprovação"
+    },
+    {
+      "data": "2024-01-16T09:15:00",
+      "evento": "Cotações recebidas",
+      "responsavel": "Sistema",
+      "detalhes": "3 financiadores apresentaram propostas"
+    }
+  ]
+}
