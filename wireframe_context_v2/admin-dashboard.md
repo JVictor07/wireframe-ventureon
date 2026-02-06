@@ -1,24 +1,21 @@
+# Admin Dashboard (Ventureon)
 
-# Admin Dashboard
+## Objetivo da Tela
+Dar à Ventureon uma visão global da plataforma para monitoramento e suporte.
 
-## Purpose (Product Intent)
-Provide operational command and visibility for internal operators.
+## Usuário
+- Admin (Ventureon)
 
-## Primary User
-- Admin (internal operator)
+## Componentes
+- Tabela global de operações
+  - Cliente
+  - Fornecedor
+  - Valor
+  - Status
+- Tabela resumida de clientes
 
-## Layout & Components
-- Global operations table:
-  - Operation ID
-  - Sacado
-  - Supplier
-  - Value
-  - Status badge
-- Filters (visual only)
-- Actions:
-  - View operation
-  - Cancel operation
+### Ação Principal
+- “Impersonar cliente”
 
-## Visual Behavior
-- Cancel triggers confirmation modal
-- No actual state change required
+## Comportamento Visual
+- Impersonar redireciona visualmente para o dashboard do Sacado

@@ -1,21 +1,19 @@
+# Modal de Confirmação
 
-# Confirmation Modal
+## Objetivo
+Evitar ações irreversíveis sem confirmação explícita.
 
-## Purpose (Product Intent)
-Avoid irreversible actions without deliberate confirmation.
+## Usado para
+- Aprovar operação
+- Rejeitar operação
+- Cancelar
+- Marcar como financiada
 
-## Usage Scope
-- Approve operation
-- Reject operation
-- Cancel operation
-- Mark as financed
+## Componentes
+- Título
+- Texto explicativo
+- Botão: Confirmar
+- Botão: Cancelar
 
-## Layout & Components
-- Title
-- Description (contextual)
-- Primary button: Confirm
-- Secondary button: Cancel
-
-## Visual Behavior
-- Modal only
-- No callbacks or real consequences
+## Comportamento Visual
+- Apenas fecha ou confirma visualmente

@@ -1,37 +1,42 @@
+# Operation Detail — Sacado
 
-# Operation Detail — Sacado View
+Operation lifecycle view.
+# Detalhe da Operação
 
-## Purpose (Product Intent)
-Enable the Sacado to approve or reject an operation with confidence and clarity.
+## Objetivo da Tela
+Ser a principal tela de decisão e governança do Sacado.
+Aqui o CFO precisa confiar totalmente no que está vendo.
 
-## Primary User
+## Usuário
 - Sacado
 
-## Key Questions This Screen Must Answer
-- What is this operation?
-- Who is involved?
-- What decision is expected from me?
+## Componentes
+### Cabeçalho
+- ID da operação
+- Status atual (badge)
 
-## Layout & Components
-- Header:
-  - Operation ID
-  - Status badge
-- Section: Invoice Details
-  - Supplier
-  - Invoice number
-  - Gross value
-  - Due date
-- Section: Financing Comparison (read-only)
-  - Financier name
-  - Rate (%)
-  - Estimated net amount
-  - Visual highlight of lowest rate
-- Section: Operation History
-  - Timeline with key events
-- Actions:
-  - Approve
-  - Reject
+### Seção: Dados da Nota
+- Fornecedor
+- Número da nota
+- Valor
+- Vencimento
 
-## Visual Behavior
-- Actions visible only for non-final states (visual only)
-- Approve/Reject open confirmation modal
+### Seção: Comparação de Financiadores
+Tabela:
+- Nome do financiador
+- Taxa
+- Valor líquido estimado
+- Destaque visual para menor taxa
+
+### Seção: Histórico
+- Linha do tempo com eventos da operação
+
+### Ações (dependem do estado — apenas visual)
+- Aprovar
+- Rejeitar
+- Selecionar financiador
+- Marcar como financiada (mock)
+
+## Comportamento Visual
+- Cada ação abre modal de confirmação
+- Estados finais são somente leitura

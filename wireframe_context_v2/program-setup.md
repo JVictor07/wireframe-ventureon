@@ -1,27 +1,25 @@
+# Configuração do Programa de Risco Sacado
 
-# Risk Sacado Program Setup
+## Objetivo da Tela
+Permitir que o Sacado configure as regras básicas do seu programa,
+sentindo que ele “define o jogo”.
 
-## Purpose (Product Intent)
-Allow the Sacado to feel ownership and control over how the risk sacado program operates.
-
-## Primary User
+## Usuário
 - Sacado
 
-## Key Message
-- “These are MY rules, applied consistently”
+## Componentes
+### Seção: Identificação
+- Input: Nome do programa
 
-## Layout & Components
-- Section: Program Identification
-  - Input: Program name
-  - Input: Standard payment term (days)
-- Section: Financial Rules
-  - Static explanatory text (no calculations)
-- Section: Associated Financiers
-  - Checkbox list of financiers
-- Action:
-  - Save button (visual only)
+### Seção: Parâmetros Gerais
+- Input: Prazo padrão de pagamento (em dias)
 
-## Visual Behavior
-- Fields are editable
-- Save shows optional static success toast
-- No retroactive effect messaging required
+### Seção: Financiadores Elegíveis
+- Lista de financiadores com checkbox
+
+### Ações
+- Botão: Salvar configuração (mock)
+
+## Comportamento Visual
+- Alterações não afetam operações existentes (texto explicativo opcional)
+- Salvar mostra toast estático

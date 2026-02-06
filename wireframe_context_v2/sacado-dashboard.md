@@ -1,35 +1,43 @@
+# Dashboard do Sacado
 
-# Sacado Dashboard
+## Objetivo da Tela
+Dar ao cliente (Sacado) uma visão clara de controle, responsabilidade e pendências.
+Essa tela deve passar a sensação de: “eu sei exatamente o que está acontecendo”.
 
-## Purpose (Product Intent)
-Give the Sacado a sense of control, governance, and immediate awareness of pending responsibilities.
+## Usuário
+- Sacado (CFO / Finance / Contas a Pagar)
 
-## Primary User
-- Sacado (CFO / Finance / Accounts Payable)
+## Componentes
+### Cabeçalho
+- Nome da empresa
+- Contexto: “Programa de Risco Sacado”
 
-## What This Screen Communicates
-- “I know exactly what requires my action”
-- “This system is under control”
+### Cards de Resumo
+- Operações aguardando aprovação
+- Operações aprovadas
+- Operações encerradas
 
-## Layout & Components
-- Page header with Sacado name
-- Summary cards:
-  - Pending approvals
-  - Approved operations
-  - Closed operations
-- Operations table:
-  - Operation ID
-  - Supplier name
-  - Invoice value
-  - Due date
-  - Status (badge)
+### Tabela de Operações
+Colunas:
+- ID da operação
+- Fornecedor
+- Valor da nota
+- Data de vencimento
+- Status (badge)
 
-## Visual Behavior
-- Rows requiring action visually highlighted
-- Entire screen is read-only
-- Sorting/filter UI is visual only (no logic)
+### Navegação lateral (Sidebar)
+- Dashboard
 
-## Mock States Displayed
-- Aguardando aprovação do sacado
-- Aprovada
-- Encerrada
+**Operações:**
+- Notas Fiscais
+- Fornecedores
+- Financiadores
+- Configurar Programa
+
+**Gerenciamento:**
+- Minha Empresa
+- Equipe
+
+## Comportamento Visual
+- Operações que exigem ação devem ter destaque
+- Tabela é somente leitura

@@ -1,27 +1,29 @@
+# Cadastro de Nota Fiscal (Pré-operação)
 
-# Invoice Creation (Pre-Operation)
+## Objetivo da Tela
+Permitir que o Sacado registre notas fiscais que podem futuramente
+virar operações de risco sacado.
 
-## Purpose (Product Intent)
-Register invoices that may later become risk sacado operations.
+## Usuário
+- Sacado
 
-## IMPORTANT UI CONSTRAINT
-- This screen does NOT create operations
-- This screen does NOT trigger anticipation
-- Data is purely mock
+## Importante
+- NÃO cria operação
+- NÃO solicita antecipação
 
-## Primary User
-- Admin
+## Componentes
+- Select: Fornecedor
+- Input: Número da nota
+- Input: Valor
+- Input: Data de vencimento
+- Botão: Salvar nota (mock)
 
-## Layout & Components
-- Form:
-  - Select: Sacado
-  - Select: Supplier
-  - Input: Invoice number
-  - Input: Invoice value
-  - Input: Due date
-- Action:
-  - Save invoice (visual only)
+## Comportamento Visual
+- Exibe confirmação estática ao salvar
+- Após salvar, usuário pode acessar "Notas Fiscais" para criar operação
 
-## Visual Behavior
-- Saving shows static confirmation
-- No navigation side effects required
+## Próximos Passos
+1. Nota fiscal é registrada no sistema
+2. Usuário acessa "Notas Fiscais" para visualizar
+3. Clica em "Criar Operação" na lista
+4. Sistema redireciona para detalhe da operação
