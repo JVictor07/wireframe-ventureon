@@ -93,15 +93,25 @@ Ela é apenas uma consequência do processo.
 
 ## Perfis de Usuário (Somente para UI)
 
-### 1. Sacado
-- Usuário principal das telas
-- Toma decisões (aprovar / rejeitar)
-- Precisa confiar no sistema
+### 1. Sacado (Cliente - Usuário Principal)
+- **Responsável por TODAS as operações**
+- Toma decisões (aprovar / rejeitar operações)
+- Cadastra notas fiscais
+- Gerencia fornecedores e financiadores
+- Seleciona financiador e marca operações como financiadas
+- Gerencia dados da própria empresa
+- Gerencia equipe interna (usuários e perfis)
+- Configura programa de risco sacado
+- Precisa confiar no sistema e ter controle total
 
-### 2. Admin (Operador interno)
-- Usuário interno da plataforma
-- Executa ações manuais
-- Existe apenas para viabilizar o fluxo no MVP
+### 2. Admin (Ventureon - Dono da Plataforma)
+- **NÃO participa de operações**
+- **Apenas monitora** a plataforma globalmente
+- Responsabilidades LIMITADAS a:
+  - Criar e gerenciar clientes (Sacados)
+  - Visualizar dashboard global (monitoramento)
+  - Impersonar cliente (acesso simulado à UI do cliente)
+- **NÃO cria** notas fiscais, fornecedores, financiadores ou operações
 
 ⚠️ **Fornecedor e Financiador NÃO possuem telas próprias neste projeto.**
 
@@ -349,6 +359,138 @@ export function DashboardSacado() {
 
 ---
 
+## Telas Implementadas
+
+### Telas do Admin (Ventureon)
+1. **Dashboard Admin** (`/admin/dashboard`)
+   - Visão global de todas as operações (somente leitura)
+   - Cards com métricas agregadas
+   - Tabela de operações com filtros
+   - Ação: Visualizar operação
+
+2. **Gestão de Clientes** (`/admin/sacados`)
+   - Tabela de clientes (Sacados)
+   - Criar/Editar cliente
+   - **Impersonar cliente** - navega para UI do Sacado
+
+3. **Detalhe de Operação Admin** (`/admin/operacao/:id`)
+   - Visualização completa da operação (somente leitura)
+   - Sem ações operacionais
+
+### Telas do Sacado (Cliente)
+1. **Dashboard Sacado** (`/sacado/dashboard`)
+   - Cards de resumo (pendentes, aprovadas, financiadas)
+   - Tabela de operações do cliente
+   - Navegação para detalhes
+
+2. **Detalhe de Operação** (`/sacado/operacao/:id`)
+   - Dados da nota fiscal
+   - Comparação de financiadores
+   - Seleção de financiador (com destaque visual)
+   - Ações: Aprovar, Rejeitar, Marcar como Financiada
+   - Histórico da operação
+
+3. **Notas Fiscais** (`/sacado/notas-fiscais`) ⭐ NOVO
+   - Listagem de todas as notas fiscais cadastradas
+   - Status: Cadastrada ou Com Operação
+   - Ação: Criar Operação baseada na NF
+   - Busca por número ou fornecedor
+
+4. **Cadastrar Nota Fiscal** (`/sacado/nota-fiscal`)
+   - Formulário para cadastro de NF
+   - Select de fornecedor
+   - Campos: número, valor, vencimento
+   - **Nota:** NÃO cria operação automaticamente
+
+5. **Gestão de Fornecedores** (`/sacado/fornecedores`)
+   - Tabela de fornecedores
+   - Criar/Editar fornecedor
+   - Campos: nome, CNPJ
+
+6. **Gestão de Financiadores** (`/sacado/financiadores`)
+   - Tabela de financiadores
+   - Criar/Editar financiador
+   - Campos: nome, taxa, prazo
+
+7. **Configurar Programa** (`/sacado/programa`)
+   - Nome do programa
+   - Parâmetros gerais
+   - Financiadores elegíveis
+
+8. **Gestão da Empresa** (`/sacado/empresa`) ⭐ NOVO
+   - Dados cadastrais (razão social, CNPJ, IE)
+   - Endereço completo
+   - Informações de contato
+   - Responsável financeiro
+
+9. **Gestão de Equipe** (`/sacado/equipe`) ⭐ NOVO
+   - Tabela de membros da equipe
+   - Perfis: Administrador Financeiro, Aprovador, Operador, Visualizador
+   - Adicionar/Editar/Remover membros
+   - Status de cada membro
+
+### Estrutura de Navegação
+
+#### Sidebar Admin
+- Dashboard
+- **Gerenciamento**
+  - Clientes (Sacados)
+
+#### Sidebar Sacado
+- Dashboard
+- **Operações**
+  - Notas Fiscais
+  - Cadastrar NF
+  - Fornecedores
+  - Financiadores
+  - Configurar Programa
+- **Gerenciamento**
+  - Minha Empresa
+  - Equipe
+
+---
+
+## Fluxo Operacional (Gerenciado pelo Sacado)
+
+O Sacado é responsável por **todo o ciclo operacional**. O fluxo correto é:
+
+### 1. Cadastro de Nota Fiscal
+- Sacado acessa "Cadastrar NF" (`/sacado/nota-fiscal`)
+- Preenche dados: fornecedor, número, valor, vencimento
+- Nota fiscal é registrada no sistema
+- **Importante:** Cadastro de NF **NÃO cria operação automaticamente**
+
+### 2. Visualização de Notas Fiscais
+- Sacado acessa "Notas Fiscais" (`/sacado/notas-fiscais`)
+- Visualiza todas as NFs cadastradas
+- Status possíveis: "Cadastrada" ou "Com Operação"
+
+### 3. Criação de Operação
+- Na lista de notas fiscais, Sacado clica em "Criar Operação"
+- Sistema cria operação baseada na NF selecionada
+- Operação entra em status "Aguardando aprovação"
+
+### 4. Aprovação da Operação
+- Sacado acessa detalhe da operação (`/sacado/operacao/:id`)
+- Revisa dados da NF e comparação de financiadores
+- Aprova ou rejeita a operação
+
+### 5. Seleção de Financiador
+- Após aprovação, Sacado visualiza propostas dos financiadores
+- Sistema destaca a menor taxa automaticamente
+- Sacado seleciona o financiador desejado
+
+### 6. Finalização
+- Sacado marca operação como "Financiada"
+- Operação é encerrada
+
+**Papel do Admin (Ventureon):**
+- **NÃO participa** do fluxo operacional
+- Apenas monitora globalmente
+- Pode impersonar cliente para suporte
+
+---
+
 ## Resumo Executivo para IA
 
 **Ao implementar telas:**
@@ -358,3 +500,8 @@ export function DashboardSacado() {
 4. Mantenha tudo estático e visual
 5. Foque em clareza e governança (CFO mindset)
 6. Nunca implemente lógica real
+
+**Separação de responsabilidades:**
+- Admin = Monitoramento + Gestão de Clientes
+- Sacado = Todas as operações + Gestão interna (empresa e equipe)
+

@@ -1,28 +1,26 @@
+# Login
 
-# Login Screen
+## Objetivo da Tela
+Ser a porta de entrada visual da plataforma, transmitindo seriedade, segurança e perfil enterprise.
 
-## Purpose (Product Intent)
-Provide a clear and professional entry point to the platform, establishing trust and seriousness expected by CFO-level users.
+## Importante (UI-only)
+- NÃO implementar autenticação real
+- NÃO validar credenciais
+- NÃO criar lógica de sessão
+- Navegação é apenas visual
 
-## UI-ONLY CONSTRAINTS (MANDATORY)
-- Do NOT implement authentication logic
-- Do NOT validate credentials
-- Do NOT connect to backend or APIs
-- Fields are purely visual
-
-## Primary User
+## Usuários
 - Sacado
-- Admin
+- Admin (Ventureon)
 
-## Layout & Components
-- Centered Card layout
-- Logo / Product name (placeholder)
-- Input: Email
-- Input: Password
-- Primary Button: “Entrar”
-- Helper text for error state (static)
+## Componentes
+- Card centralizado
+- Logo / nome da plataforma
+- Input: E-mail
+- Input: Senha
+- Botão primário: “Entrar”
 
-## Visual Behavior
-- Clicking “Entrar” navigates visually to a dashboard (mock routing)
-- Error state can be simulated with static text
-- No loading states required
+## Comportamento Visual
+- Ao clicar em “Entrar”, navegar visualmente para:
+  - Dashboard do Sacado (exemplo)
+- Mensagens de erro podem ser texto estático opcional
