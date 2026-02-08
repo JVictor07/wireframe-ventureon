@@ -22,6 +22,10 @@ export function Login() {
       navigate("/sacado/dashboard")
     } else if (userType === "admin") {
       navigate("/admin/dashboard")
+    } else if (userType === "fornecedor") {
+      navigate("/fornecedor/dashboard")
+    } else if (userType === "financiadora") {
+      navigate("/financiadora/dashboard")
     }
   }
 
@@ -73,6 +77,20 @@ export function Login() {
               onClick={() => handleLogin("sacado")}
             >
               Entrar como Sacado
+            </Button>
+            <Button 
+              variant="outline" 
+              className="w-full"
+              onClick={() => handleLogin("fornecedor")}
+            >
+              Entrar como Fornecedor
+            </Button>
+            <Button 
+              variant="outline" 
+              className="w-full"
+              onClick={() => handleLogin("financiadora")}
+            >
+              Entrar como Financiadora
             </Button>
             <Button 
               variant="outline" 

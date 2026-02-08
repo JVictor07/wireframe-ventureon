@@ -48,7 +48,15 @@ export function AdminFinanciadores() {
     status: "Ativo"
   })
 
-  const filteredFinanciadores = financiadoresData.filter(financiador =>
+  const financiadoresVentureon = financiadoresData.filter(f => f.acessoHabilitado)
+  const financiadoresCadastrados = financiadoresData.filter(f => !f.acessoHabilitado)
+
+  const filteredVentureon = financiadoresVentureon.filter(financiador =>
+    financiador.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    financiador.tipoInstituicao.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const filteredCadastrados = financiadoresCadastrados.filter(financiador =>
     financiador.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
     financiador.tipoInstituicao.toLowerCase().includes(searchTerm.toLowerCase())
   )
@@ -88,6 +96,19 @@ export function AdminFinanciadores() {
       toast.success("Financiador criado com sucesso!")
     }
     setDialogOpen(false)
+  }
+
+  const getTipoBadge = (acessoHabilitado) => {
+    return acessoHabilitado ? (
+      <Badge variant="outline" className="bg-green-50 text-green-700 border-green-300">
+        <CheckCircle2Icon className="w-3 h-3 mr-1" />
+        Ventureon
+      </Badge>
+    ) : (
+      <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-300">
+        Cadastrado
+      </Badge>
+    )
   }
 
   const getStatusBadge = (status) => {
@@ -135,23 +156,80 @@ export function AdminFinanciadores() {
       </header>
 
       <div className="container mx-auto px-6 py-8">
-        <Card>
+        <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Total de Financiadores
+              </CardTitle>
+              <TrendingDownIcon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{financiadoresData.length}</div>
+              <p className="text-xs text-muted-foreground">
+                Cadastrados na plataforma
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Financiadores Ventureon
+              </CardTitle>
+              <CheckCircle2Icon className="h-4 w-4 text-green-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">
+                {financiadoresData.filter(f => f.acessoHabilitado).length}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Com acesso à plataforma
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Apenas Cadastrados
+              </CardTitle>
+              <XCircleIcon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {financiadoresData.filter(f => !f.acessoHabilitado).length}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Sem acesso à plataforma
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="mb-6">
+          <div className="relative w-[300px] ml-auto">
+            <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar por nome ou tipo..."
+              className="pl-8"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <Card className="mb-6">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Financiadores Cadastrados</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle2Icon className="h-5 w-5 text-green-600" />
+                  Financiadores Ventureon
+                </CardTitle>
                 <CardDescription>
-                  {filteredFinanciadores.length} financiador(es) encontrado(s)
+                  {filteredVentureon.length} financiador(es) com acesso à plataforma
                 </CardDescription>
-              </div>
-              <div className="relative w-[300px]">
-                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Buscar por nome ou tipo..."
-                  className="pl-8"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
               </div>
             </div>
           </CardHeader>
@@ -160,7 +238,7 @@ export function AdminFinanciadores() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Nome</TableHead>
-                  <TableHead>Tipo</TableHead>
+                  <TableHead>Instituição</TableHead>
                   <TableHead className="text-right">Taxa Base</TableHead>
                   <TableHead>Prazo Máximo</TableHead>
                   <TableHead>Status</TableHead>
@@ -168,14 +246,78 @@ export function AdminFinanciadores() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredFinanciadores.length === 0 ? (
+                {filteredVentureon.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
-                      Nenhum financiador encontrado
+                      {searchTerm ? "Nenhum financiador Ventureon encontrado" : "Nenhum financiador Ventureon cadastrado"}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredFinanciadores.map((financiador) => (
+                  filteredVentureon.map((financiador) => (
+                    <TableRow key={financiador.id}>
+                      <TableCell className="font-medium">{financiador.nome}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{financiador.tipoInstituicao}</Badge>
+                      </TableCell>
+                      <TableCell className="text-right font-semibold text-primary">
+                        {financiador.taxaBase}% a.m.
+                      </TableCell>
+                      <TableCell>{financiador.prazoMaximo}</TableCell>
+                      <TableCell>{getStatusBadge(financiador.status)}</TableCell>
+                      <TableCell className="text-right">
+                        <span className="text-xs text-muted-foreground">
+                          Gerenciado pela plataforma
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+            
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800">
+                ℹ️ Financiadores Ventureon têm acesso direto à plataforma e gerenciam suas próprias informações. Não é possível editar seus dados por aqui.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <XCircleIcon className="h-5 w-5 text-muted-foreground" />
+                  Financiadores Cadastrados
+                </CardTitle>
+                <CardDescription>
+                  {filteredCadastrados.length} financiador(es) sem acesso à plataforma
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Nome</TableHead>
+                  <TableHead>Instituição</TableHead>
+                  <TableHead className="text-right">Taxa Base</TableHead>
+                  <TableHead>Prazo Máximo</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Ações</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredCadastrados.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                      {searchTerm ? "Nenhum financiador cadastrado encontrado" : "Nenhum financiador apenas cadastrado"}
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredCadastrados.map((financiador) => (
                     <TableRow key={financiador.id}>
                       <TableCell className="font-medium">{financiador.nome}</TableCell>
                       <TableCell>

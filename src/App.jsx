@@ -12,6 +12,23 @@ import { InvoiceCreate } from "./pages/InvoiceCreate"
 import { InvoiceList } from "./pages/InvoiceList"
 import { CompanyManagement } from "./pages/CompanyManagement"
 import { TeamManagement } from "./pages/TeamManagement"
+import { DashboardFornecedor } from "./pages/DashboardFornecedor"
+import { RecebiveisList } from "./pages/RecebiveisList"
+import { RecebivelDetail } from "./pages/RecebivelDetail"
+import { HistoricoAntecipacoes } from "./pages/HistoricoAntecipacoes"
+import { PerfilFornecedor } from "./pages/PerfilFornecedor"
+import { TeamManagementFornecedor } from "./pages/TeamManagementFornecedor"
+import { AdminFornecedoresGlobal } from "./pages/AdminFornecedoresGlobal"
+import { AdminFinanciadoresGlobal } from "./pages/AdminFinanciadoresGlobal"
+import { DashboardFinanciadora } from "./pages/DashboardFinanciadora"
+import { OportunidadesFinanciadora } from "./pages/OportunidadesFinanciadora"
+import { OportunidadeDetail } from "./pages/OportunidadeDetail"
+import { PortfolioFinanciadora } from "./pages/PortfolioFinanciadora"
+import { PortfolioDetail } from "./pages/PortfolioDetail"
+import { HistoricoFinanciadora } from "./pages/HistoricoFinanciadora"
+import { AnaliseRiscoFinanciadora } from "./pages/AnaliseRiscoFinanciadora"
+import { PerfilFinanciadora } from "./pages/PerfilFinanciadora"
+import { TeamManagementFinanciadora } from "./pages/TeamManagementFinanciadora"
 
 function App() {
   return (
@@ -35,6 +52,27 @@ function App() {
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/operacao/:id" element={<OperationDetailAdmin />} />
         <Route path="/admin/sacados" element={<AdminSacados />} />
+        <Route path="/admin/fornecedores" element={<AdminFornecedoresGlobal />} />
+        <Route path="/admin/financiadores" element={<AdminFinanciadoresGlobal />} />
+        
+        {/* Fornecedor Routes */}
+        <Route path="/fornecedor/dashboard" element={<DashboardFornecedor />} />
+        <Route path="/fornecedor/recebiveis" element={<RecebiveisList />} />
+        <Route path="/fornecedor/recebiveis/:id" element={<RecebivelDetail />} />
+        <Route path="/fornecedor/historico" element={<HistoricoAntecipacoes />} />
+        <Route path="/fornecedor/perfil" element={<PerfilFornecedor />} />
+        <Route path="/fornecedor/equipe" element={<TeamManagementFornecedor />} />
+        
+        {/* Financiadora Routes */}
+        <Route path="/financiadora/dashboard" element={<DashboardFinanciadora />} />
+        <Route path="/financiadora/oportunidades" element={<OportunidadesFinanciadora />} />
+        <Route path="/financiadora/oportunidades/:id" element={<OportunidadeDetail />} />
+        <Route path="/financiadora/portfolio" element={<PortfolioFinanciadora />} />
+        <Route path="/financiadora/portfolio/:id" element={<PortfolioDetail />} />
+        <Route path="/financiadora/historico" element={<HistoricoFinanciadora />} />
+        <Route path="/financiadora/analise" element={<AnaliseRiscoFinanciadora />} />
+        <Route path="/financiadora/perfil" element={<PerfilFinanciadora />} />
+        <Route path="/financiadora/equipe" element={<TeamManagementFinanciadora />} />
       </Routes>
     </BrowserRouter>
   )
