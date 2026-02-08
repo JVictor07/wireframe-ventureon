@@ -1,0 +1,131 @@
+[
+  {
+    "id": "PORT-001",
+    "numeroNF": "NF-2024-020",
+    "sacado": {
+      "nome": "Empresa Alpha S.A.",
+      "cnpj": "11.222.333/0001-44",
+      "rating": "A+"
+    },
+    "fornecedor": {
+      "nome": "Fornecedor ABC Ltda",
+      "cnpj": "12.345.678/0001-90"
+    },
+    "valorNF": 75000,
+    "taxaAplicada": 2.3,
+    "valorFinanciado": 73275,
+    "dataFinanciamento": "2024-02-15",
+    "dataVencimento": "2024-04-15",
+    "diasRestantes": 15,
+    "status": "Em Andamento",
+    "valorReceber": 75000
+  },
+  {
+    "id": "PORT-002",
+    "numeroNF": "NF-2024-025",
+    "sacado": {
+      "nome": "Empresa Beta Corp",
+      "cnpj": "22.333.444/0001-55",
+      "rating": "A"
+    },
+    "fornecedor": {
+      "nome": "Distribuidora XYZ S.A.",
+      "cnpj": "23.456.789/0001-01"
+    },
+    "valorNF": 110000,
+    "taxaAplicada": 2.5,
+    "valorFinanciado": 107250,
+    "dataFinanciamento": "2024-02-20",
+    "dataVencimento": "2024-04-20",
+    "diasRestantes": 20,
+    "status": "Em Andamento",
+    "valorReceber": 110000
+  },
+  {
+    "id": "PORT-003",
+    "numeroNF": "NF-2024-012",
+    "sacado": {
+      "nome": "Empresa Alpha S.A.",
+      "cnpj": "11.222.333/0001-44",
+      "rating": "A+"
+    },
+    "fornecedor": {
+      "nome": "Comercial Beta Ltda",
+      "cnpj": "45.678.901/0001-23"
+    },
+    "valorNF": 55000,
+    "taxaAplicada": 2.2,
+    "valorFinanciado": 53790,
+    "dataFinanciamento": "2024-01-25",
+    "dataVencimento": "2024-03-25",
+    "diasRestantes": 0,
+    "status": "Pago",
+    "valorReceber": 55000,
+    "dataPagamento": "2024-03-25"
+  },
+  {
+    "id": "PORT-004",
+    "numeroNF": "NF-2024-008",
+    "sacado": {
+      "nome": "Empresa Beta Corp",
+      "cnpj": "22.333.444/0001-55",
+      "rating": "A"
+    },
+    "fornecedor": {
+      "nome": "Fornecedor ABC Ltda",
+      "cnpj": "12.345.678/0001-90"
+    },
+    "valorNF": 92000,
+    "taxaAplicada": 2.4,
+    "valorFinanciado": 89792,
+    "dataFinanciamento": "2024-01-15",
+    "dataVencimento": "2024-03-15",
+    "diasRestantes": 0,
+    "status": "Pago",
+    "valorReceber": 92000,
+    "dataPagamento": "2024-03-15"
+  },
+  {
+    "id": "PORT-005",
+    "numeroNF": "NF-2024-035",
+    "sacado": {
+      "nome": "Empresa Alpha S.A.",
+      "cnpj": "11.222.333/0001-44",
+      "rating": "A+"
+    },
+    "fornecedor": {
+      "nome": "Indústria Tech Solutions",
+      "cnpj": "34.567.890/0001-12"
+    },
+    "valorNF": 68000,
+    "taxaAplicada": 2.3,
+    "valorFinanciado": 66436,
+    "dataFinanciamento": "2024-02-28",
+    "dataVencimento": "2024-04-28",
+    "diasRestantes": 28,
+    "status": "Em Andamento",
+    "valorReceber": 68000
+  },
+  {
+    "id": "PORT-006",
+    "numeroNF": "NF-2024-005",
+    "sacado": {
+      "nome": "Empresa Gamma Ltda",
+      "cnpj": "33.444.555/0001-66",
+      "rating": "B+"
+    },
+    "fornecedor": {
+      "nome": "Distribuidora XYZ S.A.",
+      "cnpj": "23.456.789/0001-01"
+    },
+    "valorNF": 45000,
+    "taxaAplicada": 2.8,
+    "valorFinanciado": 43740,
+    "dataFinanciamento": "2024-01-10",
+    "dataVencimento": "2024-03-10",
+    "diasRestantes": 0,
+    "status": "Pago",
+    "valorReceber": 45000,
+    "dataPagamento": "2024-03-10"
+  }
+]

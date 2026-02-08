@@ -32,12 +32,8 @@ import {
   CheckCircle2Icon,
   XCircleIcon,
   ToggleLeftIcon,
-<<<<<<< /Users/joaomoreira/Desktop/Trabalho/ventureon/wireframe-project/src/pages/AdminFornecedores.jsx
-  ToggleRightIcon
-=======
   ToggleRightIcon,
   UploadIcon
->>>>>>> /Users/joaomoreira/.windsurf/worktrees/wireframe-project/wireframe-project-56908c99/src/pages/AdminFornecedores.jsx
 } from "lucide-react"
 import { toast } from "sonner"
 import { ImportCSVDialog } from "@/components/ImportCSVDialog"

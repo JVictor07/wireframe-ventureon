@@ -13,12 +13,15 @@ import {
   FileTextIcon,
   CheckCircle2Icon,
   ClockIcon,
-  PlayCircleIcon
+  PlayCircleIcon,
+  UploadIcon
 } from "lucide-react"
+import { ImportCSVDialog } from "@/components/ImportCSVDialog"
 
 export function InvoiceList() {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("")
+  const [importDialogOpen, setImportDialogOpen] = useState(false)
 
   // Mock data - notas fiscais cadastradas
   const invoices = [
@@ -113,10 +116,16 @@ export function InvoiceList() {
                 </div>
               </div>
             </div>
-            <Button onClick={() => navigate("/sacado/nota-fiscal")}>
-              <PlusIcon className="w-4 h-4 mr-2" />
-              Cadastrar Nova NF
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setImportDialogOpen(true)}>
+                <UploadIcon className="w-4 h-4 mr-2" />
+                Importar CSV
+              </Button>
+              <Button onClick={() => navigate("/sacado/nota-fiscal")}>
+                <PlusIcon className="w-4 h-4 mr-2" />
+                Cadastrar Nova NF
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -212,6 +221,12 @@ export function InvoiceList() {
           </CardContent>
         </Card>
       </div>
+
+      <ImportCSVDialog 
+        open={importDialogOpen}
+        onOpenChange={setImportDialogOpen}
+        type="notas"
+      />
     </div>
   )
 }

@@ -24,12 +24,9 @@ export function Login() {
       navigate("/admin/dashboard")
     } else if (userType === "fornecedor") {
       navigate("/fornecedor/dashboard")
-<<<<<<< /Users/joaomoreira/Desktop/Trabalho/ventureon/wireframe-project/src/pages/Login.jsx
-=======
     } else if (userType === "financiadora") {
       navigate("/financiadora/dashboard")
->>>>>>> /Users/joaomoreira/.windsurf/worktrees/wireframe-project/wireframe-project-56908c99/src/pages/Login.jsx
-    }
+    } 
   }
 
   return (
@@ -91,8 +88,6 @@ export function Login() {
             <Button 
               variant="outline" 
               className="w-full"
-<<<<<<< /Users/joaomoreira/Desktop/Trabalho/ventureon/wireframe-project/src/pages/Login.jsx
-=======
               onClick={() => handleLogin("financiadora")}
             >
               Entrar como Financiadora
@@ -100,7 +95,6 @@ export function Login() {
             <Button 
               variant="outline" 
               className="w-full"
->>>>>>> /Users/joaomoreira/.windsurf/worktrees/wireframe-project/wireframe-project-56908c99/src/pages/Login.jsx
               onClick={() => handleLogin("admin")}
             >
               Entrar como Admin

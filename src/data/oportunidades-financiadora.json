@@ -1,0 +1,112 @@
+[
+  {
+    "id": "OPO-001",
+    "numeroNF": "NF-2024-045",
+    "sacado": {
+      "nome": "Empresa Alpha S.A.",
+      "cnpj": "11.222.333/0001-44",
+      "rating": "A+",
+      "historicoOperacoes": 45,
+      "taxaAdimplencia": 100
+    },
+    "fornecedor": {
+      "nome": "Fornecedor ABC Ltda",
+      "cnpj": "12.345.678/0001-90"
+    },
+    "valor": 85000,
+    "dataEmissao": "2024-03-10",
+    "dataVencimento": "2024-05-10",
+    "diasVencimento": 60,
+    "status": "Aguardando Propostas",
+    "financiadoresInteressados": 3,
+    "melhorTaxa": 2.3
+  },
+  {
+    "id": "OPO-002",
+    "numeroNF": "NF-2024-052",
+    "sacado": {
+      "nome": "Empresa Beta Corp",
+      "cnpj": "22.333.444/0001-55",
+      "rating": "A",
+      "historicoOperacoes": 32,
+      "taxaAdimplencia": 98.5
+    },
+    "fornecedor": {
+      "nome": "Distribuidora XYZ S.A.",
+      "cnpj": "23.456.789/0001-01"
+    },
+    "valor": 120000,
+    "dataEmissao": "2024-03-12",
+    "dataVencimento": "2024-05-27",
+    "diasVencimento": 75,
+    "status": "Aguardando Propostas",
+    "financiadoresInteressados": 2,
+    "melhorTaxa": 2.5
+  },
+  {
+    "id": "OPO-003",
+    "numeroNF": "NF-2024-048",
+    "sacado": {
+      "nome": "Empresa Alpha S.A.",
+      "cnpj": "11.222.333/0001-44",
+      "rating": "A+",
+      "historicoOperacoes": 45,
+      "taxaAdimplencia": 100
+    },
+    "fornecedor": {
+      "nome": "Comercial Beta Ltda",
+      "cnpj": "45.678.901/0001-23"
+    },
+    "valor": 65000,
+    "dataEmissao": "2024-03-15",
+    "dataVencimento": "2024-04-29",
+    "diasVencimento": 45,
+    "status": "Aguardando Propostas",
+    "financiadoresInteressados": 4,
+    "melhorTaxa": 2.2
+  },
+  {
+    "id": "OPO-004",
+    "numeroNF": "NF-2024-055",
+    "sacado": {
+      "nome": "Empresa Gamma Ltda",
+      "cnpj": "33.444.555/0001-66",
+      "rating": "B+",
+      "historicoOperacoes": 18,
+      "taxaAdimplencia": 95.0
+    },
+    "fornecedor": {
+      "nome": "Indústria Tech Solutions",
+      "cnpj": "34.567.890/0001-12"
+    },
+    "valor": 95000,
+    "dataEmissao": "2024-03-18",
+    "dataVencimento": "2024-05-02",
+    "diasVencimento": 45,
+    "status": "Aguardando Propostas",
+    "financiadoresInteressados": 1,
+    "melhorTaxa": 2.8
+  },
+  {
+    "id": "OPO-005",
+    "numeroNF": "NF-2024-060",
+    "sacado": {
+      "nome": "Empresa Beta Corp",
+      "cnpj": "22.333.444/0001-55",
+      "rating": "A",
+      "historicoOperacoes": 32,
+      "taxaAdimplencia": 98.5
+    },
+    "fornecedor": {
+      "nome": "Fornecedor ABC Ltda",
+      "cnpj": "12.345.678/0001-90"
+    },
+    "valor": 150000,
+    "dataEmissao": "2024-03-20",
+    "dataVencimento": "2024-06-18",
+    "diasVencimento": 90,
+    "status": "Aguardando Propostas",
+    "financiadoresInteressados": 3,
+    "melhorTaxa": 2.6
+  }
+]
