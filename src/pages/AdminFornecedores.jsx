@@ -21,15 +21,26 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Switch } from "@/components/ui/switch"
+import { Separator } from "@/components/ui/separator"
 import { 
   ArrowLeftIcon,
   PlusIcon,
   EditIcon,
   SearchIcon,
   PackageIcon,
-  CheckCircle2Icon
+  CheckCircle2Icon,
+  XCircleIcon,
+  ToggleLeftIcon,
+<<<<<<< /Users/joaomoreira/Desktop/Trabalho/ventureon/wireframe-project/src/pages/AdminFornecedores.jsx
+  ToggleRightIcon
+=======
+  ToggleRightIcon,
+  UploadIcon
+>>>>>>> /Users/joaomoreira/.windsurf/worktrees/wireframe-project/wireframe-project-56908c99/src/pages/AdminFornecedores.jsx
 } from "lucide-react"
 import { toast } from "sonner"
+import { ImportCSVDialog } from "@/components/ImportCSVDialog"
 import fornecedoresData from "@/data/fornecedores.json"
 import sacadosData from "@/data/sacados.json"
 
@@ -37,6 +48,7 @@ export function AdminFornecedores() {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("")
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [importDialogOpen, setImportDialogOpen] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [selectedFornecedor, setSelectedFornecedor] = useState(null)
   const [formData, setFormData] = useState({
@@ -44,7 +56,9 @@ export function AdminFornecedores() {
     cnpj: "",
     sacadoAssociado: "",
     email: "",
-    telefone: ""
+    telefone: "",
+    acessoHabilitado: false,
+    emailAcesso: ""
   })
 
   const filteredFornecedores = fornecedoresData.filter(fornecedor =>
@@ -61,7 +75,9 @@ export function AdminFornecedores() {
       cnpj: "",
       sacadoAssociado: "",
       email: "",
-      telefone: ""
+      telefone: "",
+      acessoHabilitado: false,
+      emailAcesso: ""
     })
     setDialogOpen(true)
   }
@@ -74,18 +90,41 @@ export function AdminFornecedores() {
       cnpj: fornecedor.cnpj,
       sacadoAssociado: fornecedor.sacadoAssociado,
       email: fornecedor.email,
-      telefone: fornecedor.telefone
+      telefone: fornecedor.telefone,
+      acessoHabilitado: fornecedor.acessoHabilitado || false,
+      emailAcesso: fornecedor.emailAcesso || ""
     })
     setDialogOpen(true)
   }
 
   const handleSave = () => {
     if (editMode) {
-      toast.success("Fornecedor atualizado com sucesso!")
+      if (formData.acessoHabilitado && selectedFornecedor && !selectedFornecedor.acessoHabilitado) {
+        toast.success("Fornecedor atualizado e acesso habilitado com sucesso!")
+      } else {
+        toast.success("Fornecedor atualizado com sucesso!")
+      }
     } else {
       toast.success("Fornecedor criado com sucesso!")
+      if (formData.acessoHabilitado) {
+        toast.info("Credenciais de acesso enviadas para o email do fornecedor")
+      }
     }
     setDialogOpen(false)
+  }
+
+  const getAcessoBadge = (acessoHabilitado) => {
+    return acessoHabilitado ? (
+      <Badge variant="outline" className="bg-green-50 text-green-700 border-green-300">
+        <CheckCircle2Icon className="w-3 h-3 mr-1" />
+        Acesso Ativo
+      </Badge>
+    ) : (
+      <Badge variant="outline" className="bg-gray-50 text-gray-700 border-gray-300">
+        <XCircleIcon className="w-3 h-3 mr-1" />
+        Sem Acesso
+      </Badge>
+    )
   }
 
   const getStatusBadge = (status) => {
@@ -121,10 +160,16 @@ export function AdminFornecedores() {
                 </div>
               </div>
             </div>
-            <Button onClick={handleCreate}>
-              <PlusIcon className="w-4 h-4 mr-2" />
-              Novo Fornecedor
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setImportDialogOpen(true)}>
+                <UploadIcon className="w-4 h-4 mr-2" />
+                Importar CSV
+              </Button>
+              <Button onClick={handleCreate}>
+                <PlusIcon className="w-4 h-4 mr-2" />
+                Novo Fornecedor
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -158,6 +203,7 @@ export function AdminFornecedores() {
                   <TableHead>CNPJ</TableHead>
                   <TableHead>Sacado Associado</TableHead>
                   <TableHead>Contato</TableHead>
+                  <TableHead>Acesso</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
@@ -165,7 +211,7 @@ export function AdminFornecedores() {
               <TableBody>
                 {filteredFornecedores.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                       Nenhum fornecedor encontrado
                     </TableCell>
                   </TableRow>
@@ -181,6 +227,7 @@ export function AdminFornecedores() {
                           <div className="text-muted-foreground">{fornecedor.telefone}</div>
                         </div>
                       </TableCell>
+                      <TableCell>{getAcessoBadge(fornecedor.acessoHabilitado)}</TableCell>
                       <TableCell>{getStatusBadge(fornecedor.status)}</TableCell>
                       <TableCell className="text-right">
                         <Button
@@ -278,14 +325,68 @@ export function AdminFornecedores() {
                 />
               </div>
             </div>
+            
+            <Separator className="my-4" />
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="space-y-0.5">
+                  <Label className="text-base">Permitir Acesso à Plataforma</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Habilite para que o fornecedor possa acessar e gerenciar seus recebíveis
+                  </p>
+                </div>
+                <Switch
+                  checked={formData.acessoHabilitado}
+                  onCheckedChange={(checked) => setFormData({ ...formData, acessoHabilitado: checked })}
+                />
+              </div>
+              
+              {formData.acessoHabilitado && (
+                <div className="space-y-4 p-4 border rounded-lg bg-muted/50">
+                  <div className="space-y-2">
+                    <Label htmlFor="emailAcesso">Email de Acesso *</Label>
+                    <Input
+                      id="emailAcesso"
+                      type="email"
+                      value={formData.emailAcesso}
+                      onChange={(e) => setFormData({ ...formData, emailAcesso: e.target.value })}
+                      placeholder="acesso@fornecedor.com.br"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Este email será usado para login na plataforma
+                    </p>
+                  </div>
+                  
+                  {!editMode && (
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                      <p className="text-sm text-blue-800">
+                        ℹ️ Uma senha temporária será gerada e enviada para o email de acesso
+                      </p>
+                    </div>
+                  )}
+                  
+                  {editMode && selectedFornecedor && !selectedFornecedor.acessoHabilitado && (
+                    <div className="p-3 bg-green-50 border border-green-200 rounded-md">
+                      <p className="text-sm text-green-800">
+                        ✓ Ao salvar, o fornecedor receberá credenciais de acesso por email
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            
             {editMode && (
               <div className="p-4 bg-muted rounded-lg">
                 <p className="text-sm">
                   <strong>ID:</strong> {selectedFornecedor?.id}
                 </p>
-                <p className="text-sm mt-2 text-muted-foreground">
-                  ℹ️ Fornecedores não possuem login na plataforma. Todas as informações são gerenciadas pelo admin.
-                </p>
+                {selectedFornecedor?.acessoHabilitado && (
+                  <p className="text-sm mt-2">
+                    <strong>Data de Habilitação:</strong> {selectedFornecedor?.dataHabilitacao ? new Date(selectedFornecedor.dataHabilitacao).toLocaleDateString('pt-BR') : '-'}
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -299,6 +400,12 @@ export function AdminFornecedores() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <ImportCSVDialog 
+        open={importDialogOpen}
+        onOpenChange={setImportDialogOpen}
+        type="fornecedores"
+      />
     </div>
   )
 }

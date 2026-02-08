@@ -1,0 +1,181 @@
+[
+  {
+    "id": "REC-001",
+    "numeroNF": "NF-2024-001",
+    "sacado": "Empresa Alpha S.A.",
+    "sacadoCNPJ": "11.222.333/0001-44",
+    "sacadoId": "SAC-001",
+    "valor": 50000,
+    "dataEmissao": "2024-01-10",
+    "dataVencimento": "2024-03-10",
+    "diasVencimento": 45,
+    "status": "Disponível para Antecipar",
+    "fornecedorId": "FOR-001",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-001",
+        "nome": "Banco Financiador A",
+        "taxa": 2.5,
+        "valorLiquido": 48750
+      },
+      {
+        "id": "FIN-002",
+        "nome": "Financeira B",
+        "taxa": 2.8,
+        "valorLiquido": 48600
+      },
+      {
+        "id": "FIN-003",
+        "nome": "Crédito Solutions",
+        "taxa": 2.3,
+        "valorLiquido": 48850
+      }
+    ]
+  },
+  {
+    "id": "REC-002",
+    "numeroNF": "NF-2024-015",
+    "sacado": "Empresa Alpha S.A.",
+    "sacadoCNPJ": "11.222.333/0001-44",
+    "sacadoId": "SAC-001",
+    "valor": 75000,
+    "dataEmissao": "2024-02-05",
+    "dataVencimento": "2024-04-05",
+    "diasVencimento": 60,
+    "status": "Disponível para Antecipar",
+    "fornecedorId": "FOR-001",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-001",
+        "nome": "Banco Financiador A",
+        "taxa": 2.5,
+        "valorLiquido": 73125
+      },
+      {
+        "id": "FIN-002",
+        "nome": "Financeira B",
+        "taxa": 2.8,
+        "valorLiquido": 72900
+      }
+    ]
+  },
+  {
+    "id": "REC-003",
+    "numeroNF": "NF-2024-022",
+    "sacado": "Empresa Beta Corp",
+    "sacadoCNPJ": "22.333.444/0001-55",
+    "sacadoId": "SAC-002",
+    "valor": 120000,
+    "dataEmissao": "2024-02-20",
+    "dataVencimento": "2024-05-20",
+    "diasVencimento": 75,
+    "status": "Disponível para Antecipar",
+    "fornecedorId": "FOR-001",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-001",
+        "nome": "Banco Financiador A",
+        "taxa": 2.5,
+        "valorLiquido": 117000
+      },
+      {
+        "id": "FIN-003",
+        "nome": "Crédito Solutions",
+        "taxa": 2.3,
+        "valorLiquido": 117240
+      }
+    ]
+  },
+  {
+    "id": "REC-004",
+    "numeroNF": "NF-2024-008",
+    "sacado": "Empresa Alpha S.A.",
+    "sacadoCNPJ": "11.222.333/0001-44",
+    "sacadoId": "SAC-001",
+    "valor": 35000,
+    "dataEmissao": "2024-01-25",
+    "dataVencimento": "2024-02-25",
+    "diasVencimento": 10,
+    "status": "Aguardando Aprovação",
+    "fornecedorId": "FOR-001",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-002",
+        "nome": "Financeira B",
+        "taxa": 2.8,
+        "valorLiquido": 34020
+      }
+    ]
+  },
+  {
+    "id": "REC-005",
+    "numeroNF": "NF-2024-030",
+    "sacado": "Empresa Beta Corp",
+    "sacadoCNPJ": "22.333.444/0001-55",
+    "sacadoId": "SAC-002",
+    "valor": 95000,
+    "dataEmissao": "2024-03-01",
+    "dataVencimento": "2024-04-30",
+    "diasVencimento": 45,
+    "status": "Antecipada",
+    "fornecedorId": "FOR-001",
+    "financiadorSelecionado": "Crédito Solutions",
+    "taxaAplicada": 2.3,
+    "valorLiquidoRecebido": 92815,
+    "dataAntecipacao": "2024-03-15"
+  },
+  {
+    "id": "REC-006",
+    "numeroNF": "NF-2024-012",
+    "sacado": "Empresa Alpha S.A.",
+    "sacadoCNPJ": "11.222.333/0001-44",
+    "sacadoId": "SAC-001",
+    "valor": 62000,
+    "dataEmissao": "2024-02-01",
+    "dataVencimento": "2024-03-15",
+    "diasVencimento": 30,
+    "status": "Disponível para Antecipar",
+    "fornecedorId": "FOR-002",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-001",
+        "nome": "Banco Financiador A",
+        "taxa": 2.5,
+        "valorLiquido": 60450
+      },
+      {
+        "id": "FIN-002",
+        "nome": "Financeira B",
+        "taxa": 2.8,
+        "valorLiquido": 60264
+      }
+    ]
+  },
+  {
+    "id": "REC-007",
+    "numeroNF": "NF-2024-025",
+    "sacado": "Empresa Beta Corp",
+    "sacadoCNPJ": "22.333.444/0001-55",
+    "sacadoId": "SAC-002",
+    "valor": 88000,
+    "dataEmissao": "2024-02-28",
+    "dataVencimento": "2024-04-28",
+    "diasVencimento": 50,
+    "status": "Disponível para Antecipar",
+    "fornecedorId": "FOR-004",
+    "financiadoresDisponiveis": [
+      {
+        "id": "FIN-001",
+        "nome": "Banco Financiador A",
+        "taxa": 2.5,
+        "valorLiquido": 85800
+      },
+      {
+        "id": "FIN-003",
+        "nome": "Crédito Solutions",
+        "taxa": 2.3,
+        "valorLiquido": 85976
+      }
+    ]
+  }
+]

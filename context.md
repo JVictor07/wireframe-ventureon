@@ -72,7 +72,7 @@ Criar **templates de tela (wireframes de alta fidelidade)** usando **React + sha
 A plataforma organiza operações de **Risco Sacado**, conectando:
 
 - Sacado (empresa compradora)
-- Fornecedor (sem login)
+- Fornecedor (com login opcional, habilitado pelo sacado)
 - Financiadores (sem login)
 
 A plataforma **NÃO empresta dinheiro** e **NÃO assume risco financeiro**.
@@ -110,10 +110,22 @@ Ela é apenas uma consequência do processo.
 - Responsabilidades LIMITADAS a:
   - Criar e gerenciar clientes (Sacados)
   - Visualizar dashboard global (monitoramento)
-  - Impersonar cliente (acesso simulado à UI do cliente)
+  - Visualizar e gerenciar fornecedores globalmente
+  - Impersonar cliente ou fornecedor (acesso simulado para suporte)
 - **NÃO cria** notas fiscais, fornecedores, financiadores ou operações
 
-⚠️ **Fornecedor e Financiador NÃO possuem telas próprias neste projeto.**
+### 3. Fornecedor (Usuário Opcional - Habilitado pelo Sacado)
+- **Acesso habilitado pelo sacado** na gestão de fornecedores
+- Visualiza recebíveis disponíveis de **TODOS os sacados** que vendeu
+- Compara opções de financiadores
+- Solicita antecipação de recebíveis
+- Acompanha histórico de antecipações
+- Gerencia dados do próprio perfil
+- Gerencia equipe interna (usuários e perfis)
+- **NÃO cadastra** notas fiscais (isso é feito pelo sacado)
+- **NÃO aprova** operações (apenas solicita antecipação)
+
+⚠️ **Financiador NÃO possui telas próprias neste projeto.**
 
 ---
 
@@ -373,7 +385,14 @@ export function DashboardSacado() {
    - Criar/Editar cliente
    - **Impersonar cliente** - navega para UI do Sacado
 
-3. **Detalhe de Operação Admin** (`/admin/operacao/:id`)
+3. **Gestão de Fornecedores Global** (`/admin/fornecedores`) ⭐ NOVO
+   - Visão consolidada de TODOS os fornecedores da plataforma
+   - Cards de métricas (total, com acesso, ativos, taxa de adoção)
+   - Filtros por sacado, status de acesso, atividade
+   - Ações: Impersonar fornecedor, Ver operações
+   - Suporte e monitoramento de adoção
+
+4. **Detalhe de Operação Admin** (`/admin/operacao/:id`)
    - Visualização completa da operação (somente leitura)
    - Sem ações operacionais
 
@@ -402,10 +421,13 @@ export function DashboardSacado() {
    - Campos: número, valor, vencimento
    - **Nota:** NÃO cria operação automaticamente
 
-5. **Gestão de Fornecedores** (`/sacado/fornecedores`)
+5. **Gestão de Fornecedores** (`/sacado/fornecedores`) ⭐ ATUALIZADO
    - Tabela de fornecedores
    - Criar/Editar fornecedor
-   - Campos: nome, CNPJ
+   - Campos: nome, CNPJ, email, telefone
+   - **Toggle de acesso à plataforma** - habilita login do fornecedor
+   - Email de acesso e credenciais (quando habilitado)
+   - Badge de status de acesso (Ativo/Sem Acesso)
 
 6. **Gestão de Financiadores** (`/sacado/financiadores`)
    - Tabela de financiadores
@@ -429,12 +451,61 @@ export function DashboardSacado() {
    - Adicionar/Editar/Remover membros
    - Status de cada membro
 
+### Telas do Fornecedor (Acesso Opcional) ⭐ NOVO
+1. **Dashboard Fornecedor** (`/fornecedor/dashboard`)
+   - Cards de resumo (total disponível, aguardando, antecipado, sacados)
+   - Tabela de recebíveis consolidados de TODOS os sacados
+   - Filtros por sacado e status
+   - Navegação para detalhes
+
+2. **Recebíveis Disponíveis** (`/fornecedor/recebiveis`)
+   - Listagem completa de todos os recebíveis
+   - Filtros avançados (sacado, status, busca)
+   - Informações detalhadas (NF, sacado, valores, datas)
+   - Ação: Ver Detalhes
+
+3. **Detalhe do Recebível** (`/fornecedor/recebiveis/:id`)
+   - Dados da nota fiscal
+   - Informações do sacado
+   - Comparação de financiadores disponíveis
+   - Destaque da melhor taxa
+   - Ação: Solicitar Antecipação
+   - Histórico da operação
+
+4. **Histórico de Antecipações** (`/fornecedor/historico`)
+   - Cards de métricas (total antecipado, operações, taxa média, descontos)
+   - Tabela de operações finalizadas
+   - Filtros por período e sacado
+   - Detalhes de cada antecipação
+
+5. **Meu Perfil** (`/fornecedor/perfil`)
+   - Dados cadastrais (nome, CNPJ, email, telefone)
+   - Endereço completo
+   - Dados bancários (mock)
+   - Sacados relacionados (lista read-only)
+
+6. **Gestão de Equipe** (`/fornecedor/equipe`) ⭐ NOVO
+   - Tabela de membros da equipe do fornecedor
+   - Perfis: Administrador, Operador Financeiro, Visualizador
+   - Adicionar/Editar/Remover membros
+   - Status de cada membro
+
 ### Estrutura de Navegação
 
 #### Sidebar Admin
 - Dashboard
 - **Gerenciamento**
   - Clientes (Sacados)
+  - Fornecedores ⭐ NOVO
+
+#### Sidebar Fornecedor ⭐ NOVO
+- Dashboard
+- **Operações**
+  - Recebíveis Disponíveis
+  - Histórico
+- **Gerenciamento**
+  - Meu Perfil
+  - Equipe
 
 #### Sidebar Sacado
 - Dashboard
@@ -502,6 +573,7 @@ O Sacado é responsável por **todo o ciclo operacional**. O fluxo correto é:
 6. Nunca implemente lógica real
 
 **Separação de responsabilidades:**
-- Admin = Monitoramento + Gestão de Clientes
-- Sacado = Todas as operações + Gestão interna (empresa e equipe)
+- Admin = Monitoramento + Gestão de Clientes + Gestão Global de Fornecedores + Suporte
+- Sacado = Todas as operações + Gestão interna (empresa e equipe) + Habilitar acesso de fornecedores
+- Fornecedor = Visualizar recebíveis + Solicitar antecipações + Gestão de equipe própria
 
